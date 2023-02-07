@@ -36,12 +36,12 @@ type TToursDataItem = {
 
 const Home = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
       {toursData.map((item: TToursDataItem, i: number) => {
         return (
           <div
             key={item._id}
-            className="flex flex-col rounded-[12px] bg-white text-black"
+            className="flex flex-col  rounded-[12px] border-[1px] shadow-inner bg-white text-black"
           >
             <div className="relative ">
               <div className="relative" id="tour-card-image">
@@ -89,8 +89,29 @@ const Home = () => {
                 <div>{item.maxGroupSize}</div>
               </div>
             </div>
-            <div className="px-[8px]">
-              <button>Details</button>
+            <div className="p-[16px] grid grid-flow-col gap-6 bg-[#f7f7f7] rounded-b-[12px]">
+              <div>
+                {" "}
+                <p>
+                  <span className="font-[400] text-[14px]">
+                    $ {item.price}{" "}
+                  </span>
+                  <span className="text-[#999] text-[12px]">per person</span>
+                </p>
+                <p>
+                  <span className="font-[400] text-[14px]">
+                    {item.ratingsAverage}
+                  </span>
+                  <span className="text-[#999] text-[12px]">
+                    {" "}
+                    ratings({item.ratingsQuantity})
+                  </span>
+                </p>
+              </div>
+
+              <button className="p-[8px] bg-[#55c57a] text-white rounded-[24px] hover:-translate-y-1 hover:shadow-xl">
+                Details
+              </button>
             </div>
           </div>
         );
