@@ -38,7 +38,13 @@ const TourDetails = () => {
           </div>
           <div className="grid grid-cols-12 gap-y-6 ">
             <div className="col-start-4 col-end-10">
-              <form onSubmit={() => {}} className="flex flex-col gap-y-4">
+              <form
+                onSubmit={() => {}}
+                className="flex flex-col gap-y-4"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+              >
                 <label htmlFor="name">Name:</label>
                 <input
                   type="text"
