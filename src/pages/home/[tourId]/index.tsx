@@ -34,6 +34,10 @@ const TourDetails = () => {
       console.log("Response received");
       if (res.status === 200) {
         console.log("Response succeeded!");
+        //@ts-ignore
+        nameRef.current.value = "";
+        //@ts-ignore
+        emailRef.current.value = "";
       }
     });
   };

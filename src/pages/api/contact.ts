@@ -10,7 +10,6 @@ const sendMail = async (req: any) => {
     },
     secure: true,
   });
-  console.log(req.body);
   const mailData = {
     from: process.env.EMAIL,
     to: process.env.TORECIPIENT,
@@ -24,7 +23,7 @@ const sendMail = async (req: any) => {
   };
   transporter.sendMail(mailData, function (err: any, info: any) {
     if (err) console.log(err);
-    else console.log(info);
+    else console.log("info", info);
   });
 };
 const contact = async (req: any, res: any) => {
