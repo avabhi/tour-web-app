@@ -1,11 +1,13 @@
 import { toursData } from "@/ constants/tours";
 import Layout from "@/components/Layout/Layout";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 const TourDetails = () => {
   const router = useRouter();
+  let nameRef = React.useRef<HTMLInputElement>(null);
+  const emailRef = React.useRef<HTMLInputElement>(null);
   const [value, setValue] = useState<string>("");
   const { tourId } = router.query as {
     tourId: string;
@@ -13,9 +15,27 @@ const TourDetails = () => {
   const currentTourData = toursData.filter((item) => {
     return item._id === tourId;
   })[0];
-  console.log("here", currentTourData);
   const formSubmitHandler = (event: any) => {
     event.preventDefault();
+
+    const data = {
+      name: nameRef?.current?.value,
+      email: emailRef?.current?.value,
+      tourName: currentTourData.name,
+    };
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      console.log("Response received");
+      if (res.status === 200) {
+        console.log("Response succeeded!");
+      }
+    });
   };
   return (
     <>
@@ -24,26 +44,24 @@ const TourDetails = () => {
           <h2 className="text-[24px] font-[600] ">{currentTourData.name}</h2>
           <h4>{currentTourData.description}</h4>
           <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
-            {currentTourData.images.map((item) => {
+            {currentTourData.images.map((item, i) => {
               return (
-                <>
+                <div key={i}>
                   <img
                     src={`/img/tours/${item}`}
                     alt="tour-image"
                     className="rounded-[12px]"
                   />
-                </>
+                </div>
               );
             })}
           </div>
           <div className="grid grid-cols-12 gap-y-6 ">
             <div className="col-start-4 col-end-10">
               <form
-                onSubmit={() => {}}
+                onSubmit={(e) => formSubmitHandler(e)}
                 className="flex flex-col gap-y-4"
                 name="contact"
-                method="POST"
-                data-netlify="true"
               >
                 <label htmlFor="name">Name:</label>
                 <input
@@ -51,6 +69,7 @@ const TourDetails = () => {
                   name="name"
                   id="name"
                   className="bg-white rounded-[6px] broder-[1px] border-solid border-black p-[8px]"
+                  ref={nameRef}
                 />
                 <label htmlFor="Email">Email:</label>
                 <input
@@ -58,6 +77,7 @@ const TourDetails = () => {
                   name="Email"
                   id="email"
                   className="bg-white rounded-[6px] broder-[1px] border-solid border-black p-[8px]"
+                  ref={emailRef}
                 />
 
                 {/* <label htmlFor="Phone">Phone:</label>
