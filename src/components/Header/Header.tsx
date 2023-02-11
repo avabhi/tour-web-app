@@ -27,16 +27,15 @@ const Header: React.FC<IHeaderProps> = (props) => {
             </li>
           </ul>
         </div>
-        {!props.open && (
+        {/* {!props.open && (
           <div className=" flex md:hidden" onClick={() => props.setOpen(true)}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/img/hamburger.png"
               alt="hamburger"
               className="w-[32px] h-[32px]"
             />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
