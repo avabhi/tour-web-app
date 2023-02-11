@@ -10,6 +10,19 @@ const sendMail = async (req: any) => {
     },
     secure: true,
   });
+
+  await new Promise((resolve, reject) => {
+    // verify connection configuration
+    transporter.verify(function (error: any, success: any) {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        console.log("Server is ready to take our messages");
+        resolve(success);
+      }
+    });
+  });
   const mailData = {
     from: process.env.EMAIL,
     to: process.env.TORECIPIENT,
@@ -21,9 +34,18 @@ const sendMail = async (req: any) => {
     Email: ${req.body.email} <br/>
     Tour Name: ${req.body.tourName}</p>`,
   };
-  transporter.sendMail(mailData, function (err: any, info: any) {
-    if (err) console.log(err);
-    else console.log("info", info);
+
+  await new Promise((resolve, reject) => {
+    // send mail
+    transporter.sendMail(mailData, (err: any, info: any) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        console.log(info);
+        resolve(info);
+      }
+    });
   });
 };
 const contact = async (req: any, res: any) => {
