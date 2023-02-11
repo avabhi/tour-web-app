@@ -1,5 +1,6 @@
 import { toursData } from "@/ constants/tours";
 import Layout from "@/components/Layout/Layout";
+import { useRouter } from "next/router";
 import React from "react";
 
 type TLocataion = {
@@ -35,6 +36,7 @@ type TToursDataItem = {
 };
 
 const Home = () => {
+  const router = useRouter();
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
       {toursData.map((item: TToursDataItem, i: number) => {
@@ -109,7 +111,10 @@ const Home = () => {
                 </p>
               </div>
 
-              <button className="p-[8px] bg-[#55c57a] text-white rounded-[24px] hover:-translate-y-1 hover:shadow-xl">
+              <button
+                className="p-[8px] bg-[#55c57a] text-white rounded-[24px] hover:-translate-y-1c hover:shadow-xl"
+                onClick={() => router.push(`/home/${item._id}`)}
+              >
                 Details
               </button>
             </div>
