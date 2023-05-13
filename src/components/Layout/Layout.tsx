@@ -12,7 +12,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
       <div onClick={() => setOpen(!open)}>
         <Header setOpen={setOpen} open={open} />
 
-        <div className="py-[5rem] px-[6rem] relative bg-[#f7f7f7]">
+        <div className="p-[2.5rem] md:py-[5rem] md:px-[6rem] relative bg-[#f7f7f7]">
           {children}
         </div>
       </div>
