@@ -72,7 +72,7 @@ const TourDetails = () => {
                   type="text"
                   name="name"
                   id="name"
-                  className="bg-white rounded-[6px] broder-[1px] border-solid border-black p-[8px]"
+                  className="bg-white rounded-[6px]  p-[8px] focus:outline-[0.5px] focus:outline-black"
                   ref={nameRef}
                 />
                 <label htmlFor="Email">Email:</label>
@@ -80,7 +80,7 @@ const TourDetails = () => {
                   type="email"
                   name="Email"
                   id="email"
-                  className="bg-white rounded-[6px] broder-[1px] border-solid border-black p-[8px]"
+                  className="bg-white rounded-[6px]  p-[8px] focus:outline-[0.5px] focus:outline-black"
                   ref={emailRef}
                 />
 
